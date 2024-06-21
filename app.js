@@ -8,14 +8,14 @@ parrafo.innerHTML = 'Indica un número del 1 al 10'
 
 let secretNumber = 0;
 let attempts = 0;
-let listaNumerosSorteados = [];
+let drawnNumbersList = [];
 let maxNumber = 10;
 
-function asignarTextoElemento(elemento, texto) {
+function assingTextElement(element, text) {
 
-    let elementoHTML = document.querySelector(elemento);
+    let elementHTML = document.querySelector(element);
 
-    elementoHTML.innerHTML = texto;
+    elementHTML.innerHTML = text;
 
 
 }
@@ -28,17 +28,17 @@ function generateNumberSecret() {
 
 
     //si ya sorteamos todos los numeros
-    if (listaNumerosSorteados.length === maxNumber) {
+    if (drawnNumbersList.length === maxNumber) {
         
-        asignarTextoElemento('p', 'Ya se sortearon todos los números posibles');
+        assingTextElement('p', 'Ya se sortearon todos los números posibles');
 
     } else{
         //esta en la lista este numero generado?
-        if (listaNumerosSorteados.includes(generatedNumber)) {
+        if (drawnNumbersList.includes(generatedNumber)) {
             return  generateNumberSecret();
     
         } else {
-            listaNumerosSorteados.push(generatedNumber);
+            drawnNumbersList.push(generatedNumber);
             return generatedNumber;
         }
 
@@ -47,7 +47,7 @@ function generateNumberSecret() {
 // anatomia de una funcion - forma tradicional
 
 //Declarando la función
-function verificarIntento() {
+function verifyAttempt() {
 
     let userNumber = parseInt(document.getElementById('userValue').value);
     console.log(typeof (userNumber));
@@ -56,15 +56,15 @@ function verificarIntento() {
     console.log(userNumber === secretNumber);
 
     if (userNumber == secretNumber) {
-        asignarTextoElemento('p', `¡Felicidades! Has acertado el número en ${attempts} ${(attempts === 1) ? 'vez' : 'veces'}`);
+        assingTextElement('p', `¡Felicidades! Has acertado el número en ${attempts} ${(attempts === 1) ? 'vez' : 'veces'}`);
 
         document.getElementById('reiniciar').removeAttribute('disabled');
 
     } else {
         if (userNumber > secretNumber) {
-            asignarTextoElemento('p', 'El número secreto es menor que ' + userNumber);
+            assingTextElement('p', 'El número secreto es menor que ' + userNumber);
         } else {
-            asignarTextoElemento('p', 'El número secreto es mayor que ' + userNumber);
+            assingTextElement('p', 'El número secreto es mayor que ' + userNumber);
         }
 
         attempts++;
@@ -79,8 +79,8 @@ function cleanBox() {
 
 function initialConditions() {
 
-    asignarTextoElemento('h1', 'Juego del número secreto');
-    asignarTextoElemento('p', `Indica un número del 1 al ${maxNumber}`);
+    assingTextElement('h1', 'Juego del número secreto');
+    assingTextElement('p', `Indica un número del 1 al ${maxNumber}`);
 
     //generar numero aleatorio
     secretNumber = generateNumberSecret();
